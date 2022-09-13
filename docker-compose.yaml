@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  
+  #aplicacion: Puede probarse para ver la funcionalidad, pero no es buena práctica levantar el front en Docker
+  #cliente:
+  # build: ./cliente
+  # image: cliente:latest
+  # ports:
+  #    - 3000:3000
+
+  #server pool
+  server_1:
+    build: ./server
+    image: server:latest
+    ports:
+      - 3002:3001
+    restart: on-failure:3
+
+  server_2:
+    build: ./server
+    image: server:latest
+    ports:
+      - 3003:3001
+    restart: on-failure:3
+
+  server_3:
+    build: ./server
+    image: server:latest
+    ports:
+      - 3004:3001
+    restart: on-failure:3
+
+  #load balancer
+  nginx:
+    build: ./load_balancer
+    image: nginx:latest
+    ports:
+      - 3001:3001
+    depends_on: 
+      - server_1
+      - server_2
+      - server_3
+    restart: on-failure:3
