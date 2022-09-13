@@ -1,0 +1,16 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  padding: 20 
+}
+
+.Box{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border: 1;
+  border-color:#3e48cf;
+  padding: 20 
+}
